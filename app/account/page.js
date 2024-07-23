@@ -1,72 +1,105 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import supabase  from '../api/api'
-import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react';
+import supabase from '../api/api';
+import { useRouter } from 'next/navigation';
 
-
-const page = () => {
+const Page = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [hobbies, setHobbies] = useState([]);
-    const [aboutMe, setAboutMe] = useState("");
+    const [aboutMe, setAboutMe] = useState('');
     const router = useRouter();
 
-    const signOff = async () =>
-    {
-        const {data, error} = await supabase.auth.getUser();
-        if(data.user !== null)
-        {
+    const signOff = async () => {
+        const { data, error } = await supabase.auth.getUser();
+        if (data.user !== null) {
             await supabase.auth.signOut();
-            router.push('/')
+            router.push('/');
         }
-    }
-    
-    useEffect(() => 
-    {
+    };
+
+    useEffect(() => {
         const fetchData = async () => {
-            const {data, error} = await supabase.auth.getUser();
-            if(data.user)
-            {
-                setHobbies(data.user.user_metadata.interests);
-                setAboutMe(data.user.user_metadata.aboutMe);
-                console.log(data.user)
+            const { data, error } = await supabase.auth.getUser();
+            if (data.user) {
+                setEmail(data.user.email);
+                // Fetch additional user details from your database
+                const userProfile = await supabase
+                    .from('profiles')
+                    .select('username, about_me, hobbies')
+                    .eq('id', data.user.id)
+                    .single();
+                setUsername(userProfile.data.username);
+                setAboutMe(userProfile.data.about_me);
+                setHobbies(userProfile.data.hobbies);
             }
-        }
+        };
         fetchData();
-    })
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // Update user profile in your database
+        const updates = {
+            id: (await supabase.auth.getUser()).data.user.id,
+            username,
+            about_me: aboutMe,
+            hobbies,
+        };
+
+        const { data, error } = await supabase.from('profiles').upsert(updates);
+        if (error) {
+            console.error('Error updating profile:', error);
+        } else {
+            console.log('Profile updated:', data);
+        }
+    };
 
     return (
-    <div className="h-screen flex justify-center items-center">
-        <div className="card w-120 h-96 shadow-lg md:w-[500px] mt-20 glass">
-          <div className="avatar justify-start p-8">
-            <div className="w-32 rounded-full">
-              <img src="https://i.pravatar.cc/150?img=67.jpg" />
-            </div>
-            <div className="ml-6 justify-end">
-              <p className="text-black text-lg">Joan Doe</p>
-              <p>Toronto &#8226; Active</p>
-            </div>
-          </div>
-          <div className="card-body">
-            <h2 className='card-title gap-10'>About Me</h2>
-                <p>
-                    {aboutMe}
-                </p>
-            <h2 className="card-title">Hobbies & Interests</h2>
-                <ul className="gap-2">
-                    {hobbies.map((hobby, index) => (
-                    <li key={index} className={`badge badge-primary badge-outline ${index !== 0 ? 'ml-2' : ''}`}>
-                        {hobby}
-                    </li>
-                    ))}
-                </ul>
-          </div>
-            <button onClick={signOff} className='btn btn-primary btn-outline'>
-                Log Out
-            </button>
-          </div>
+        <div>
+            <h1>Account Settings</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Username:</label>
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        disabled
+                    />
+                </div>
+                <div>
+                    <label>About Me:</label>
+                    <textarea
+                        value={aboutMe}
+                        onChange={(e) => setAboutMe(e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Hobbies:</label>
+                    <input
+                        type="text"
+                        value={hobbies}
+                        onChange={(e) => setHobbies(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit">Update Account</button>
+            </form>
+            <button onClick={signOff}>Sign Off</button>
+        </div>
+    );
+};
 
-    </div>
-  )
-}
-
-export default page
+export default Page;
