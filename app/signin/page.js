@@ -81,7 +81,7 @@ const page = () => {
     <Grid spacing={10} container className='h-screen w-full flex justify-center items-center'>
         <Grid item xs={4} >
             <Stack spacing={2}>
-                <h3>Sign In to Friendli</h3>
+                <h3>Sign In to Mingle</h3>
                 
                 <p>Email</p>
                 <label className="input bg-white input-bordered flex items-center gap-2">

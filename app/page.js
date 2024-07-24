@@ -33,15 +33,15 @@ const Page = () => {
               <h2>
                 Welcome to{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                  Friendli
+                  Mingle
                 </span>
               </h2>
               <p>
-                Set up an account as a volunteer or an elderly, list your
-                hobbies and interests and start matching with other people{" "}
+              Set up an account on Mingle, list your hobbies and interests, and start matching with others. Explore potential connections to find people with shared interests and values. Whether you're looking for a new friend, a casual date, or a meaningful relationship, Mingle can help you connect with others who share your goals.{" "}
                 <br />
-                Help out an elderly with loneliness and call them to
-                make them happy
+                Engage in friendly conversations and see where they lead—who knows, you might find a great match!
+
+
               </p>
               <button
                 onClick={handleRedirectSignup}
