@@ -104,7 +104,7 @@ const page = () => {
         </Grid>
 
         <Grid item xs={6}>
-            <img src="/image.png" className="w-12/12 h-12/12" alt=""></img>
+            <img src="ming2.avif" className="w-12/12 h-12/12" alt=""></img>
         </Grid>
     </Grid>
 </div>

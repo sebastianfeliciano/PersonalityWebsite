@@ -78,7 +78,7 @@ const Page = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <img src="/image1.png" className="w-full h-full" alt=""></img>
+            <img src="ming1.avif" className="w-full h-full" alt=""></img>
           </Grid>
         </Grid>
       </div>
