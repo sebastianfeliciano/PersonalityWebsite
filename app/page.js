@@ -33,16 +33,15 @@ const Page = () => {
               <h2>
                 Welcome to{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                  Friendli
+                  Mingle
                 </span>
               </h2>
               <p>
-                Set up an account as a volunteer or an elderly, list your
-                hobbies and interests and start matching with other people{" "}
-                <br />
-                Help out an elderly with loneliness and call them to
-                make them happy
-              </p>
+  Create an account and take our personality test to discover your perfect match. 
+  <br />
+  Share your hobbies and interests to connect with like-minded individuals.
+  
+</p>
               <button
                 onClick={handleRedirectSignup}
                 className="btn bg-indigo-800 text-white w-10/12"
@@ -78,7 +77,7 @@ const Page = () => {
           </Grid>
 
           <Grid item xs={6}>
-            <img src="/image1.png" className="w-full h-full" alt=""></img>
+            <img src="https://png.pngtree.com/png-clipart/20201223/ourlarge/pngtree-boy-and-girl-in-relationship-with-simple-art-style-have-a-png-image_2635928.jpg" className="w-full h-full" alt=""></img>
           </Grid>
         </Grid>
       </div>

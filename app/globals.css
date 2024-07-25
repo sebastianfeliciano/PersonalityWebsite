@@ -41,6 +41,10 @@
   color: white;
 }
 
+.blurred-image {
+  filter: blur(10px);
+}
+
 
 .checkbox-bordered {
   border: 2px solid red;

@@ -19,7 +19,7 @@ const page = () => {
             const {data, error} = await supabase.auth.getUser();
             if(data.user)
             {
-                router.push('/main')
+                router.push('/account')
             }
         }
         fetchData();
@@ -54,7 +54,7 @@ const page = () => {
                     password: password,
                 })
 
-                router.push('/main')
+                router.push('/account')
 
             } catch (error) {
                 alert('Error signing up:', error);

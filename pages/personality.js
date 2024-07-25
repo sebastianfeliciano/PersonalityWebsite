@@ -1,5 +1,5 @@
 import React from "react";
-import PersonalityTest from "../components/PersonalityTest";
+import PersonalityTest from '../app/signup/personalitytest/page';
 
 const Personality = () => {
   return <PersonalityTest />;

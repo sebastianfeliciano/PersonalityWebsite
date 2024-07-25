@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className='border border-solid border-b-gray flex h-16'>
            <Grid container  className='flex justify-center items-center'>
                 <Grid item xs = {7} lg={7} >
-                    <button onClick={handleHomePage} className="btn bg-black text-white">LOGO</button>
+                    <button onClick={handleHomePage} className="btn bg-black text-white">:MINGLE:</button>
                 </Grid>
                 <Grid onClick={handleSignin} item xs = {1.5} lg={0.75} textAlign="center">
                     <button className='btn bg-black text-white'>Log In</button>
